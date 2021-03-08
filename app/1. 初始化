@@ -17,62 +17,19 @@
 
 二. 初始化WebRtc
 
+        // 1. 创建客户端单例
+        peerConnectionClient = PeerConnectionClient.getInstance();
+        // 2. 创建连接参数
+        PeerConnectionClient.PeerConnectionParameters parameters = PeerConnectionClient.PeerConnectionParameters.createDefault();
+        // 3. 创建工厂类,初始化连接参数
+        peerConnectionClient.createFactory(this,parameters,this);
 
 
+三. 连接房间
 
-三. 开始连接
-
-
-四. 初始化本地预览图像
-
-
-五. 发送SDP
-
-
-六. 开始连接
-
-
-1. 创建openGl绘制,获取绘制全局上下文
-
-
-ps: 特效 RenderEvent中第二个方法
-
-2. 设置本地view悬浮 硬件加速(需求:类似微信,右下角本地悬浮,点击本地和远端切换)
-
-3. 设置缩放
-
-4. 设置镜像内存 -> 加快读取速度
-
-5. 设置连接参数 --> 设置辅助类 PeerConnectionClient
-
-    连接回调接口 -->
-
-    主要分为 画面 音频 视频 三种类型的参数
-
-    1) videoCallEnabled
-    2) loopback 回拨
-    3) videoCodec 视频编码
-    4) videoCodecHwAcceleration 硬编码
-
-    创建连接
-    1) 创建线程池进行耗时操作
-        PeerConnectionFactory
-        a. 创建连接通道 并且初始化
-
-        WebRctAudioUtils
-        b. 自动挂断
-        c. 自动操作
-
-        options为factory参数
-
-连接房间服务器
-
-    房间服务器接口
-
-WebSocketRtcClient
-
-
-ps: HandlerThread
+        RoomConnectionParameters parameters = new RoomConnectionParameters("https://47.111.68.11","8888",false);
+        WebRtcSocketClient socketClient = new WebRtcSocketClient(this);
+        socketClient.connectRoom(parameters);
 
 
 
